@@ -68,7 +68,7 @@ const Navbar = ({ nombreUsuario = 'Usuario' }) => {
         <Link href="/session/MisAmigos">
           <p style={linkStyles}>Amigos</p>
         </Link>
-        <Link href="/session/anAmigos">
+        <Link href="/session/agregarAmigos">
           <p style={linkStyles}>Añade amigos</p>
         </Link>
         <Link href="/session/mensajes">
