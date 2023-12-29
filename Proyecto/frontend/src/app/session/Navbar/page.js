@@ -74,9 +74,6 @@ const Navbar = ({ nombreUsuario = 'Usuario' }) => {
         <Link href="/session/mensajes">
           <p style={linkStyles}>Mensaje de amigos</p>
         </Link>
-        <Link href="/session/pacientes">
-          <p style={linkStyles}>Consulta pacientes</p>
-        </Link>
         <Link href="/session/CrearPublish">
           <p style={linkStyles}>Crear Publicacion</p>
         </Link>
