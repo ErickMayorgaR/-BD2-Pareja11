@@ -45,7 +45,7 @@ const Register = () => {
     
                 if (response.status === 200) {
                     alert("Usuario registrado con éxito");
-                    window.location.href = "session/login";
+                    window.location.href = "/session/login";
                 } else {
                     const error = await response.json();
                     alert(error.message);
