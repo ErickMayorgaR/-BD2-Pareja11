@@ -15,6 +15,15 @@ const containerStyles = {
     padding: '20px',
     marginBottom: '20px',
   };
+
+
+/*
+ const userData = sessionStorage.getItem("user");
+  if (userData) {
+    const user = JSON.parse(amigosData);
+    console.log(userData)
+  }
+*/
   
 const Perfil = () => {
   // Datos simulados del perfil del usuario

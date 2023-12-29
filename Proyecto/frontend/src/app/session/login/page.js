@@ -29,6 +29,11 @@ const Login = () => {
       if (response.status === 200) {
         alert("Usuario logeado con éxito");
 
+        if (result && result.user) {
+          sessionStorage.setItem("user", JSON.stringify(result.user));
+          console.log(result.user)
+        }
+
         window.location.href = "/session/publicaciones"; // validar la sesion permanente
     } else {
         const error = await response.json();
