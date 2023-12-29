@@ -28,7 +28,7 @@ const Login = () => {
       if (response.status === 200) {
         alert("Usuario logeado con éxito");
 
-        window.location.href = "session/login"; // validar la sesion permanente
+        window.location.href = "/session/publicaciones"; // validar la sesion permanente
     } else {
         const error = await response.json();
         alert(error.message);
@@ -104,7 +104,7 @@ const Login = () => {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           No tienes una cuenta?{' '}
-          <a href="/session/publicaciones" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+          <a href="/session/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
             registrate
           </a>
         </p>
