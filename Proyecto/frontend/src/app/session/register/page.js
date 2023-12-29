@@ -30,14 +30,14 @@ const Register = () => {
             const formData = new FormData();
             formData.append("name", nombreCompleto);
             formData.append("username", nombreUsuario);
-            formData.append("correo", correo);
+            formData.append("email", correo);
             formData.append("age", edad);
             formData.append("especialidad", especialidad);
             formData.append("password", btoa(contrasena));
             formData.append("foto", base64String); // Agregar la foto en Base64
     
             try {
-                const response = await fetch("/api/registrar", {
+                const response = await fetch("http://localhost:4000/registrarUsuario", {
                     method: "POST",
                     body: formData,
                     // No establecer 'Content-Type' cuando se usa FormData
