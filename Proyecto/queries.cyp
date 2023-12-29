@@ -29,6 +29,17 @@ CREATE (doctor2:Doctor {
 });
 
 
+
+CREATE (n:Doctor {
+  name: "María García Rodríguez",
+  username: "maria.garcia",
+  email: "maria.garcia@gmail.com",
+  age: 30,
+  especialidad: "Pediatría",
+  password: "contraseña456"
+})
+
+
 CREATE (n:Doctor {
   name: "María García Rodríguez",
   username: "maria.garcia",
@@ -51,10 +62,24 @@ CREATE (n:Doctor {
 
 
 
-MATCH (juan:Doctor), (maria:Doctor)
-WHERE juan.name = "Juan Pérez López"
-AND maria.name = "María García Rodríguez"
-MERGE (juan)-[:Amigo]->(maria)
+MATCH (n:Doctor), (m:Doctor)
+WHERE n.name = "Juan Pérez López"
+AND m.name = "María García Rodríguez"
+MERGE (n)-[:amigo]->(m)
+
+
+
+MATCH (n:Doctor), (m:Doctor)
+WHERE n.name = "Juan Pérez López"
+AND m.name = "Dr Admin"
+MERGE (n)-[:amigo]->(m)
+
+
+
+//ver amigos
+
+MATCH (d:Doctor {name: "Juan Pérez López"})-[:amigo]->(amigo)
+RETURN amigo
 
 
 CREATE (p:Publicacion {

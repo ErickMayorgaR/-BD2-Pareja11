@@ -14,41 +14,49 @@ const Register = () => {
     const [contrasena, setContrasena] = useState("");
 
    
-
-
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        const formData = new FormData();
-        formData.append("name", nombreCompleto);
-        formData.append("username", nombreUsuario);
-        formData.append("email", foto);
-        formData.append("correo", correo);
-        formData.append("age", edad);
-        formData.append("especialidad", especialidad);
-        formData.append("password", btoa(contrasena));
-        formData.append("foto", 3);
-
-
-        try {
-            const response = await fetch("/api/registrar", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-
-            if (response.status === 201) {
-                alert("Usuario registrado con éxito");
-                window.location.href = "/";
-            } else {
-                const error = await response.json();
-                alert(error.message);
-            }
-        } catch (error) {
-            alert(error);
+        const file = foto; 
+        // Verificar si se ha seleccionado un archivo
+        if (!file) {
+            alert("Por favor, selecciona una foto.");
+            return;
         }
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+            // Convertir el archivo a Base64
+            const base64String = reader.result;
+    
+            const formData = new FormData();
+            formData.append("name", nombreCompleto);
+            formData.append("username", nombreUsuario);
+            formData.append("correo", correo);
+            formData.append("age", edad);
+            formData.append("especialidad", especialidad);
+            formData.append("password", btoa(contrasena));
+            formData.append("foto", base64String); // Agregar la foto en Base64
+    
+            try {
+                const response = await fetch("/api/registrar", {
+                    method: "POST",
+                    body: formData,
+                    // No establecer 'Content-Type' cuando se usa FormData
+                });
+    
+                if (response.status === 200) {
+                    alert("Usuario registrado con éxito");
+                    window.location.href = "session/login";
+                } else {
+                    const error = await response.json();
+                    alert(error.message);
+                }
+            } catch (error) {
+                alert(error);
+            }
+        };
+    
+        // Leer el archivo como una URL de datos (Base64)
+        reader.readAsDataURL(file);
     };
 
     return (
@@ -189,7 +197,7 @@ const Register = () => {
 
                 <p className="mt-10 text-center text-sm text-gray-500">
           Ya tienes una cuenta?{' '}
-          <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+          <a href="/session/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
             Inicia Sesión
           </a>
         </p>
