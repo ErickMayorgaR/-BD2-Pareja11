@@ -23,6 +23,13 @@ const Publicaciones = () => {
 
   useEffect(() => {
     // Realizar la solicitud GET al servidor
+    const userData = sessionStorage.getItem("user");
+    if (userData) {
+      const user = JSON.parse(userData);
+      console.log(user)
+      //console.log(user)
+    }
+    
     fetch('http://localhost:4000/obtenerPublicaciones')
       .then((response) => response.json())
       .then((data) => {

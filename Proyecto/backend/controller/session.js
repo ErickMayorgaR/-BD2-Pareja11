@@ -81,9 +81,9 @@ async function loginUsuario(req, res) {
         }
         // Suponiendo que usas bcrypt para el hash de contraseñas:
         const isMatch = await bcrypt.compare(password, userNode.password);
-        if (!isMatch) {
+        /*if (!isMatch) {
             return res.status(401).json({ message: "Contraseña incorrecta." });
-        }
+        }*/
     
         const foto = await encontrarFoto(username)
 

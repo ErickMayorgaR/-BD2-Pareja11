@@ -31,13 +31,21 @@ const SearchSpecificPerson = () => {
 
   const handleBuscarClick = async () => {
     try {
+      // Realizar la solicitud GET al servidor
+      var usuario = "Juan Pérez López"; // Usuario quemado
+      const userData = sessionStorage.getItem("user");
+      if (userData) {
+        const user = JSON.parse(userData);
+        //console.log(user)
+        usuario = user.name
+      }
       const response = await fetch('http://localhost:4000/agregarAmigo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: 'mario',
+          name: usuario,
           acceptedFriendName: nombre,
         }),
       });

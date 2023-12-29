@@ -34,8 +34,15 @@ const CrearPublicacion = () => {
   const [contenido, setContenido] = useState('');
 
   const handleCrearPublicacion = () => {
-    const usuario = "Juan Mecanico"; // Usuario quemado
-
+    var usuario = "Juan Mecanico default"; // Usuario quemado
+    // Realizar la solicitud GET al servidor
+    const userData = sessionStorage.getItem("user");
+    if (userData) {
+      const user = JSON.parse(userData);
+      //console.log(user)
+      usuario = user.name
+    }
+    console.log(usuario)
     fetch('http://localhost:4000/crearPublicacion', {
       method: 'POST',
       headers: {

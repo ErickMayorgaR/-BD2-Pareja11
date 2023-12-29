@@ -18,20 +18,39 @@ const cardStyles = {
 
 const MisAmigos = () => {
   const [amigos, setAmigos] = useState([]);
+  const [userData, setUserData] = useState(null);
+
 
   useEffect(() => {
+    obtenerDatosUsuario();
     obtenerAmigos();
   }, []);
 
+  
+  const obtenerDatosUsuario = () => {
+    const userDataFromSession = sessionStorage.getItem("user");
+    if (userDataFromSession) {
+      const user = JSON.parse(userDataFromSession);
+      setUserData(user);
+    }
+  };
+
   const obtenerAmigos = async () => {
     try {
+      var datamandar 
+      console.log("Esto deberia ser la data ya cargada")
+      const userDataFromSession = sessionStorage.getItem("user");
+      if (userDataFromSession) {
+        const user = JSON.parse(userDataFromSession);
+        datamandar = user
+      }
       const response = await fetch('http://localhost:4000/verMisAmigos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: 'Juan Pérez López', // Nombre quemado
+          name: datamandar ? datamandar.name : 'Juan Pérez López', // Utiliza el nombre del usuario de la sesión
         }),
       });
 
