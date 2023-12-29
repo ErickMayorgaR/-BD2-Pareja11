@@ -33,7 +33,7 @@ const Register = () => {
             formData.append("email", correo);
             formData.append("age", edad);
             formData.append("especialidad", especialidad);
-            formData.append("password", btoa(contrasena));
+            formData.append("password", contrasena);
             formData.append("foto", base64String); // Agregar la foto en Base64
     
             try {
