@@ -80,6 +80,9 @@ const Navbar = ({ nombreUsuario = 'Usuario' }) => {
         <Link href="/session/CrearPublish">
           <p style={linkStyles}>Crear Publicacion</p>
         </Link>
+        <Link href="/session/Consultas">
+          <p style={linkStyles}>Consultas a pacientes</p>
+        </Link>
       </div>
     </div>
   );
