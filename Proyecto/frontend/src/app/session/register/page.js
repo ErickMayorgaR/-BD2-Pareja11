@@ -13,21 +13,27 @@ const Register = () => {
     const [especialidad, setEspecialidad] = useState("");
     const [contrasena, setContrasena] = useState("");
 
+   
+
+
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-            nombreUsuario,
-            foto,
-            correoElectronico,
-            edad,
-            especialidad,
-            contrasena: btoa(contrasena), // cifra la contraseña
-        };
+
+        const formData = new FormData();
+        formData.append("name", nombreCompleto);
+        formData.append("username", nombreUsuario);
+        formData.append("email", foto);
+        formData.append("correo", correo);
+        formData.append("age", edad);
+        formData.append("especialidad", especialidad);
+        formData.append("password", btoa(contrasena));
+        formData.append("foto", 3);
+
 
         try {
             const response = await fetch("/api/registrar", {
                 method: "POST",
-                body: JSON.stringify(data),
+                body: formData,
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -97,8 +103,9 @@ const Register = () => {
                             <input
                                 type="file"
                                 id="foto"
-                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" onChange={(e) => setFoto(e.target.files[0])}
-                                required
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                                onChange={(e) => setFoto(e.target.files[0])}
+
                             />
                         </div>
                     </div>

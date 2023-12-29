@@ -34,7 +34,7 @@ CREATE (n:Doctor {
   username: "maria.garcia",
   email: "maria.garcia@gmail.com",
   age: 30,
-  especialidad: "Pediatría"
+  especialidad: "Pediatría",
   password: "contraseña456"
 })
 
@@ -44,7 +44,7 @@ CREATE (n:Doctor {
   username: "juan.perez",
   email: "juan.perez@gmail.com",
   age: 35,
-  especialidad: "Medicina General"
+  especialidad: "Medicina General",
   password : "contraseña456" 
 })
 
@@ -55,3 +55,13 @@ MATCH (juan:Doctor), (maria:Doctor)
 WHERE juan.name = "Juan Pérez López"
 AND maria.name = "María García Rodríguez"
 MERGE (juan)-[:Amigo]->(maria)
+
+
+CREATE (p:Publicacion {
+  autor: "Juan Pérez López",
+  fecha: "2023-12-28T10:00:00",
+  contenido: "En este artículo, comparto los últimos avances en medicina general, enfocándome en las nuevas terapias para enfermedades crónicas. La medicina general está evolucionando rápidamente, y es crucial estar al día con las últimas investigaciones y técnicas."
+})
+
+MATCH (juan:Doctor { name: "Juan Pérez López" }), (p:Publicacion { autor: "Juan Pérez López" })
+MERGE (juan)-[:Publicó]->(p)
