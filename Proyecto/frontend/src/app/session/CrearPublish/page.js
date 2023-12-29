@@ -16,6 +16,7 @@ const inputStyles = {
   padding: '10px',
   fontSize: '16px',
   marginBottom: '20px',
+  color: 'black'
 };
 
 const buttonStyles = {
@@ -28,42 +29,48 @@ const buttonStyles = {
   cursor: 'pointer',
 };
 
+
 const CrearPublicacion = () => {
   const [contenido, setContenido] = useState('');
 
   const handleCrearPublicacion = () => {
-    // Aquí puedes enviar la información del contenido al servidor o realizar la acción que corresponda
-    console.log('Contenido de la publicación:', contenido);
-    // Puedes realizar una petición POST para enviar la nueva publicación al servidor
-    // fetch('URL_DEL_SERVIDOR', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ contenido }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   // Manejar la respuesta del servidor si es necesario
-    // })
-    // .catch(error => console.error(error));
+    const usuario = "Juan Mecanico"; // Usuario quemado
+
+    fetch('http://localhost:4000/crearPublicacion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ autor: usuario, contenido }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('Publicación creada con éxito');
+        } else {
+          throw new Error('Error al crear publicación');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert('Error al crear publicación');
+      });
   };
 
   return (
     <>
-        <Navbar nombreUsuario="Nombre del Usuario" />
-        <div style={containerStyles}>
+      <Navbar nombreUsuario="Nombre del Usuario" />
+      <div style={containerStyles}>
         <h1 className="text-2xl font-bold text-center mt-4 mb-6">AÑADIR UNA PUBLICACIÓN</h1>
         <textarea
-            placeholder="Escribe tu publicación aquí..."
-            value={contenido}
-            onChange={(e) => setContenido(e.target.value)}
-            style={inputStyles}
+          placeholder="Escribe tu publicación aquí..."
+          value={contenido}
+          onChange={(e) => setContenido(e.target.value)}
+          style={inputStyles}
         />
         <button onClick={handleCrearPublicacion} style={buttonStyles}>
-            Crear
+          Crear
         </button>
-        </div>
+      </div>
     </>
   );
 };
