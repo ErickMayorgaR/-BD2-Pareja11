@@ -41,16 +41,6 @@ CREATE (n:Doctor {
 
 
 CREATE (n:Doctor {
-  name: "María García Rodríguez",
-  username: "maria.garcia",
-  email: "maria.garcia@gmail.com",
-  age: 30,
-  especialidad: "Pediatría",
-  password: "contraseña456"
-})
-
-
-CREATE (n:Doctor {
   name: "Juan Pérez López",
   username: "juan.perez",
   email: "juan.perez@gmail.com",
@@ -90,3 +80,11 @@ CREATE (p:Publicacion {
 
 MATCH (juan:Doctor { name: "Juan Pérez López" }), (p:Publicacion { autor: "Juan Pérez López" })
 MERGE (juan)-[:Publicó]->(p)
+
+
+//Eliminar relaciones
+MATCH ()-[r]-() DELETE r
+// eliminar todos los elementos
+MATCH (n) DELETE n
+
+

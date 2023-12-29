@@ -1,6 +1,8 @@
 const neo4jSession = require('../database/neo4j.js');
 const connectToMongoDB = require('../database/mongo.js');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+
 
 const sessionN = neo4jSession.getSession(); // Obtiene una nueva sesión
 
@@ -123,7 +125,30 @@ async function encontrarFoto(nombre) {
 
 }
 
+
+async function subirPDF(req, res) {
+    try {
+        const db = await connectToMongoDB();
+        const collection = db.collection('pdf');
+        const name  = req.body.name;
+        if (!req.file) {
+            return res.status(400).send('No se envió ningún archivo.');
+          }
+        
+          const pdfData = fs.readFileSync(req.file.path);
+          await collection.insertOne({name, pdf: new Buffer.from(pdfData) });
+
+        res.status(200).send({ success: true });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Error en el servidor"
+        })
+    }
+}
+
 module.exports = {
     registrarUsuario,
-    loginUsuario
+    loginUsuario,
+    subirPDF
 }

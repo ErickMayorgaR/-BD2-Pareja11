@@ -13,10 +13,15 @@ const neo4jController = require('../controller/publicaciones.js');
 //LOGIN Y REGISTRO
 router.post('/registrarUsuario',upload.single(),sessionController.registrarUsuario);
 router.post('/loginUsuario', sessionController.loginUsuario);
+router.post('/subirPDF',upload.single("pdf"),sessionController.subirPDF);
 
 //Amistades
 router.post('/agregarAmigo', amigosController.agregarAmigo);
 router.post('/verMisAmigos', amigosController.verMisAmigos);
+router.post('/amigosPorEspecialidad',amigosController.amigosPorEspecialidad);
+router.post('/amigosComun', amigosController.amigosPorAmigosEnComun)
+router.post('/amigosPorNombre', amigosController.amigosPorNombre);
+router.post('/enviarMensaje', amigosController.enviarMensaje);
 
 
 //CONSULTAS DE PACIENTES
